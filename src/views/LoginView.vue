@@ -34,6 +34,7 @@ export default {
     },
     mounted() {
         this.allusers = JSON.parse(localStorage.getItem('alllogusers')) || [];   
+        this.activeUser = JSON.parse(localStorage.getItem('activeUser'))
     },
     methods: {
         handleLogin() {
@@ -56,7 +57,7 @@ export default {
         // Login successful
         localStorage.setItem('activeUser', JSON.stringify(newUser))
         this.errorMessage = ''
-        this.router.push('/dash')
+        this.router.push(`/dash/ ${this.activeUser.username}`)
         }
     }
 }

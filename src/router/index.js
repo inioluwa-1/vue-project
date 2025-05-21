@@ -82,7 +82,7 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/dash',
+      path: '/dash/:username',
       component: DashView
     },
     {
