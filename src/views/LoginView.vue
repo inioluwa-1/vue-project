@@ -38,27 +38,51 @@ export default {
     },
     methods: {
         handleLogin() {
-        const newUser = this.allusers.find(user => user.username === this.username && user.password === this.password)
+  const newUser = this.allusers.find(user => user.username === this.username && user.password === this.password)
+  
+  if (!newUser) {
+    // Check if username exists but password is incorrect
+    const existingUser = this.allusers.find(user => user.username === this.username)
+    if (existingUser) {
+      this.errorMessage = 'Incorrect password. Please try again.'
+    } else {
+      this.errorMessage = 'User does not exist. Please sign up.'
+    }
+    setTimeout(() => {
+      this.errorMessage = ''
+    }, 2000)
+    return
+  }
+  
+  // Login successful
+  localStorage.setItem('activeUser', JSON.stringify(newUser))
+  this.activeUser = JSON.parse(localStorage.getItem('activeUser')); // Update this.activeUser
+  
+  this.router.push({name: 'dashview', params:{username:this.activeUser.username}});
+}
+        // handleLogin() {
+        // const newUser = this.allusers.find(user => user.username === this.username && user.password === this.password)
         
-        if (!newUser) {
-            // Check if username exists but password is incorrect
-            const existingUser = this.allusers.find(user => user.username === this.username)
-            if (existingUser) {
-            this.errorMessage = 'Incorrect password. Please try again.'
-            } else {
-            this.errorMessage = 'User does not exist. Please sign up.'
-            }
-            setTimeout(() => {
-            this.errorMessage = ''
-            }, 2000)
-            return
-        }
+        // if (!newUser) {
+        //     // Check if username exists but password is incorrect
+        //     const existingUser = this.allusers.find(user => user.username === this.username)
+        //     if (existingUser) {
+        //     this.errorMessage = 'Incorrect password. Please try again.'
+        //     } else {
+        //     this.errorMessage = 'User does not exist. Please sign up.'
+        //     }
+        //     setTimeout(() => {
+        //     this.errorMessage = ''
+        //     }, 2000)
+        //     return
+        // }
         
-        // Login successful
-        localStorage.setItem('activeUser', JSON.stringify(newUser))
-        this.errorMessage = ''
-        this.router.push(`/dash/ ${this.activeUser.username}`)
-        }
+        // // Login successful
+        // localStorage.setItem('activeUser', JSON.stringify(newUser))
+        // this.errorMessage = ''
+        // // this.router.push(`/dash/${this.activeUser.username}`) this or that-->
+        // this.router.push({name: 'dashview', params:{username:this.activeUser.username}});
+        // }
     }
 }
 </script>

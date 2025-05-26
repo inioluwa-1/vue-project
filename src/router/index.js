@@ -14,6 +14,8 @@ import ParentView from '@/views/ParentView.vue'
 import LogView from '@/views/LogView.vue'
 import LoginView from '@/views/LoginView.vue'
 import DashView from '@/views/DashView.vue'
+import EventParent from '@/views/EventParent.vue'
+import CounterView from '@/views/CounterView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,13 +28,13 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       // another method of routing
-      // component: AboutView
+      component: AboutView
 
 
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-       component: () => import('../views/AboutView.vue'),
+      //  component: () => import('../views/AboutView.vue'),
     },
     {
       path: '/hello',
@@ -82,8 +84,20 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/dash/:username',
-      component: DashView
+      // /dash
+      path: '/:username',
+      component: DashView,
+      name: 'dashview'
+    },
+    {
+      path: '/event',
+      component: EventParent,
+      name: 'event'
+    },
+    {
+      path: '/counter',
+      component: CounterView,
+      name: 'counter'
     },
     {
       path: '/:catchAll(.*)',

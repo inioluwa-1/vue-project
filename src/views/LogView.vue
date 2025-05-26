@@ -49,10 +49,25 @@ import { useRouter } from 'vue-router';
     password: password.value
   }
   
-  const existingUser = JSON.parse(localStorage.getItem('alllogusers')).find(user => user.username === obj.username)
-  if (existingUser) {
-    usernameError.value = 'Username already exists. Please choose a different username.';
-    return
+  const users = JSON.parse(localStorage.getItem('alllogusers'));
+  
+  // Check if users is not null
+  if (users) {
+    // Check if username already exists
+    const existingUser = users.find(user => user.username === obj.username)
+    if (existingUser) {
+      // Handle error: username already exists
+      usernameError.value = 'Username already exists. Please choose a different username.';
+      return
+    }
+    
+    // Check if email already exists
+    const existingEmail = users.find(user => user.email === obj.email)
+    if (existingEmail) {
+      // Handle error: email already exists
+      emailError.value = 'Email already exists. Please choose a different email.';
+      return
+    }
   }
   
   Allusers.push(obj)
@@ -64,6 +79,29 @@ import { useRouter } from 'vue-router';
 
   console.log(Allusers);
 }
+
+//  const handleSubmit = () => {
+//   let obj = {
+//     username: username.value,
+//     email: email.value,
+//     password: password.value
+//   }
+  
+//   const existingUser = JSON.parse(localStorage.getItem('alllogusers')).find(user => user.username === obj.username)
+//   if (existingUser) {
+//     usernameError.value = 'Username already exists. Please choose a different username.';
+//     return
+//   }
+  
+//   Allusers.push(obj)
+//   localStorage.setItem('alllogusers', JSON.stringify(Allusers))
+  
+//   if (localStorage['alllogusers']) {
+//     router.push('/login')
+//   }
+
+//   console.log(Allusers);
+// }
 
 </script>
 
