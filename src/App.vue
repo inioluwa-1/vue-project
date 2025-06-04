@@ -1,5 +1,5 @@
 <script setup>
-import HomeComponent from './views/HomeComponent.vue'
+// import HomeComponent from './views/HomeComponent.vue'
 </script>
 
 <template>

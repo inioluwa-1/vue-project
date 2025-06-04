@@ -1,14 +1,14 @@
-import {definedStore} from 'pinia'
+import {defineStore} from 'pinia'
 
-export const useCounterStore = definedStore('counter', {
+export const useCounterStore = defineStore('counter', {
     state: () => ({
         count: 20,
         name: 'George',
         arrobj:JSON.parse(localStorage.getItem('allsignupusers'))
     }),
     actions: {
-        // increment() {
-        //     this.count++
-        // }
+        increment() {
+            this.count++
+        }
     }
 })

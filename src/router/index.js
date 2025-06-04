@@ -16,6 +16,8 @@ import LoginView from '@/views/LoginView.vue'
 import DashView from '@/views/DashView.vue'
 import EventParent from '@/views/EventParent.vue'
 import CounterView from '@/views/CounterView.vue'
+import RegisTer from '@/views/RegisTer.vue'
+import Vuelidate from '@/views/Vuelidate.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -98,6 +100,16 @@ const router = createRouter({
       path: '/counter',
       component: CounterView,
       name: 'counter'
+    },
+    {
+      path: '/register',
+      component: RegisTer,
+      name: 'register'
+    },
+    {
+      path: '/vue',
+      component: Vuelidate,
+      name: 'vuelidate'
     },
     {
       path: '/:catchAll(.*)',
